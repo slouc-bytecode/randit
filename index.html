@@ -4,8 +4,19 @@
 <style>
 h2 {
     text-align: center;
-    margin: 0px auto;
-    padding: 0px 0px 5px 0px;  
+    margin: 0px auto;  
+}
+h3 {
+    margin-left: 2%;
+    margin-right: 4%;
+}
+.btn-xlg {
+    padding: 18px 28px;
+    font-size: 80px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
 }
 </style>
 <head>
@@ -35,11 +46,28 @@ h2 {
 	function addChoice() {
 		choices.push(document.getElementById('input1').value);
 		document.getElementById("input1").value = "";
+        document.getElementById("input1").placeholder = "Option no."+(choices.length+1);
+        var choicesstr = "";
+        if (choices.length > 0) choicesstr += choices[0];
+        for (var i=1; i<choices.length; i++) {
+            choicesstr += ", "+choices[i]
+        }
+        document.getElementById("choices").innerHTML = choicesstr
 	}
+
+    function clearChoice() {
+        choices = [];
+        document.getElementById("input1").placeholder = "Option no.1";
+        document.getElementById("choices").innerHTML = "";
+        document.getElementById("result").innerHTML = "&nbsp";
+    }
 	
 	function randomize() {
 		var i = Math.floor(Math.random() * choices.length);
-		document.getElementById("result").innerHTML = choices[i];
+        var res = "&nbsp";
+        if (choices.length > 0)
+            res = choices[i]
+		document.getElementById("result").innerHTML = res;
 	}
 	
 	</script>
@@ -48,17 +76,20 @@ h2 {
 <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Welcome to Randit.io!<img src="http://www.clipartbest.com/cliparts/yik/pbx/yikpbxkiE.png" alt="some_text" height="90" width="150" align="right"></h1>
-        <p><br>Have a dilemma on where to travel? Not sure which meal to prepare for your date? <br> Tell us your options and let us make the choice for you! <br>If you can't decide it - Rand It!<br><br>
+        <p><br>Can't decide on which movie to see? Which Travis album to listen to? Need to draw straws with no straws around?<br>
+        Let us make the decision for you! <br><br>If you can't decide it - Rand It!<br><br>
 		</p>
 		<div class="form-horizontal">
-			<p><a href="#" class="btn btn-primary btn-lg" role="button" onclick="addChoice()" id="add">Add &raquo;</a>
-<input id="input1" type="text" class="hasclear" onkeydown="if (event.keyCode == 13) document.getElementById('add').click()"> Add your options one by one (reload the page to empty the bucket)</p>
-		</div>
-		<p><a href="#" class="btn btn-primary btn-lg" role="button" onclick="randomize()">Rand it!</a></p>
+			<p><a href="#" class="btn btn-default btn-lg" role="button" onclick="addChoice()" id="add">Add &raquo;</a>
+            <input id="input1" placeholder="Option no.1" type="text" class="hasclear" onkeydown="if (event.keyCode == 13) document.getElementById('add').click()"> 
+			<a href="#" class="btn btn-default btn-lg" role="button" onclick="clearChoice()" id="clear">Clear</a>
+        </div>
+		<p><a href="#" class="btn btn-lg btn-primary" role="button" onclick="randomize()">Rand it!</a></p>
+	  <h2 id="result">&nbsp</h2>
       </div>
-	  <div>
-	  <h2 id="result"></h2>
-	  </div>
+
+      <p style="margin-left: 2%; font-size: 150%" id="choices"></p>
+	  
 <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
