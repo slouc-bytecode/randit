@@ -1,4 +1,4 @@
-randit
+Randit.io
 ======
 
-Define some choices and let the site pick one for you randomly. Bootstrap + Javascript + Go.
+Define some choices and let the site pick one for you randomly.
