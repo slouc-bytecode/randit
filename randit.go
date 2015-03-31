@@ -3,7 +3,6 @@ package main
 import (
     "net/http"
     "io/ioutil"
-//  "github.com/gorilla/mux"
 )
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
